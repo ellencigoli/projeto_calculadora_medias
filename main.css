@@ -2,18 +2,30 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     background-color: #E7E7E7;
-    padding-top: 100px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 header img {
@@ -22,59 +34,62 @@ header img {
 }
 
 header h1 {
-    font-size: 40px;
+    font-size: 28px;
     font-weight: bold;
-}
-
-.container {
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
+    color: #333;
 }
 
 form {
     display: flex;
-    max-width: 640px;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-form input {
-    font-size: 24px;
+form input[type="text"],
+form input[type="number"] {
+    flex: 1;
+    font-size: 18px;
     background-color: #fff;
-    border: none;
-    border-bottom: 2px solid #000;
-    padding: 8px;
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 4px;
 }
 
-/* Botão do formulário */
 form button {
     background-color: #009432;
     color: #fff;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 10px 20px;
+    border-radius: 4px;
 }
 
 table {
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 table th {
     border-bottom: 2px solid #000;
     padding: 16px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
+    text-align: left;
 }
 
 table td {
-    padding: 16px 0;
-    text-align: center;
+    padding: 16px;
+    text-align: left;
     font-size: 18px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+table td:last-child {
+    text-align: center;
 }
 
 table td img {
@@ -83,9 +98,9 @@ table td img {
 
 .resultado {
     padding: 8px;
-    color: #000;
-    background-color: transparent;
-    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 4px;
 }
 
 .aprovado {
@@ -96,15 +111,38 @@ table td img {
     background-color: red;
 }
 
-/* Estilos para o footer */
-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
-    color: #333;
+@media only screen and (max-width: 600px) {
+    /* Estilos para telas menores */
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    header img {
+        margin-bottom: 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    form input[type="text"],
+    form input[type="number"] {
+        width: 100%;
+    }
+
+    form button {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        font-size: 16px;
+        padding: 12px;
+    }
 }
