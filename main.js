@@ -5,9 +5,7 @@ const atividades = [];
 const notas = [];
 const spanAprovado = '<span class="resultado aprovado">Aprovado</span>';
 const spanReprovado = '<span class="resultado reprovado">Reprovado</span>';
-const notaMinima = parseFloat(prompt("Digite a nota mínima:"));
-
-let linhas = '';
+let notaMinima = 7; // Valor padrão da nota mínima
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -33,26 +31,40 @@ function adicionaLinha() {
         linha += `<td>${inputNotaAtividade.value >= notaMinima ? imgAprovado : imgReprovado}</td>`;
         linha += '</tr>';
         
-        linhas += linha;
+        document.querySelector('tbody').innerHTML += linha;
     }
 
     inputNomeAtividade.value = '';
     inputNotaAtividade.value = '';
 }
 
+function atualizaTabela() {
+    const tbody = document.querySelector('tbody');
+    let linhas = '';
+    atividades.forEach((atividade, index) => {
+        linhas += `<tr><td>${atividade}</td><td>${notas[index]}</td><td>${notas[index] >= notaMinima ? imgAprovado : imgReprovado}</td></tr>`;
+    });
+    tbody.innerHTML = linhas;
+}
+
 function atualizaMediaFinal() {
     const mediaFinal = calculaMediaFinal();
 
-    document.getElementById('media-final-valor').innerHTML = mediaFinal;
-    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= notaMinima ? spanAprovado :spanReprovado;
+    document.getElementById('media-final-valor').textContent = mediaFinal !== null ? mediaFinal.toFixed(2) : '---';
+    document.getElementById('media-final-resultado').innerHTML = mediaFinal !== null ? (mediaFinal >= notaMinima ? spanAprovado : spanReprovado) : '<span class="resultado sem-resultado">---</span>';
 }
 
-function calculaMediaFinal () {
-    let somaDasNotas = 0;
-
-    for (let i = 0; i < notas.length; i++) {
-        somaDasNotas += notas[i];
+function calculaMediaFinal() {
+    if (notas.length === 0) {
+        return null;
     }
 
-    return somaDasNotas / notas.length;
+    const somaDasNotas = notas.reduce((total, nota) => total + nota, 0);
+    const media = somaDasNotas / notas.length;
+    return media;
 }
+
+// Remover prompt e definir nota mínima
+window.addEventListener('DOMContentLoaded', () => {
+    notaMinima = parseFloat(prompt("Digite a nota mínima:"));
+});
